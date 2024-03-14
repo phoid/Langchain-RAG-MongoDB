@@ -17,14 +17,16 @@ database = client["langchain"]
 collection = database["Docs"]
 
 embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-large", api_key=keys.OPENAI_KEY, dimensions=1516
+    model="text-embedding-3-large",
+    api_key=keys.OPENAI_KEY,
+    dimensions=1516,
 )
 
 
 def process_text_file():
     for file in os.scandir(directory):
 
-        file = open(file)
+        file = open(file, encoding="utf8")
         text_content = file.read()
         embedded = embeddings.embed_query(text_content)
         document = {
