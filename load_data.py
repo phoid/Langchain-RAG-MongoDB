@@ -5,6 +5,8 @@ from langchain_community.llms import OpenAI
 import keys
 import getpass
 import os
+from langchain_community.document_loaders import PyPDFLoader
+
 
 # os.environ[keys.OPENAI_KEY] = getpass.getpass()
 
@@ -30,14 +32,27 @@ def process_text_file():
         text_content = file.read()
         embedded = embeddings.embed_query(text_content)
         document = {
-            "title": os.fsdecode(file.name)[8:],
             "text": text_content,
             "embedding": embedded,
         }
         collection.insert_one(document)
 
 
+def process_pdf():
+    loader = PyPDFLoader("pdfs\OCB-student-handbook-v3.6.pdf")
+    pages = loader.load_and_split()
+    for page in pages:
+        embedded = embeddings.embed_query(page.page_content)
+        document = {
+            "text": page.page_content,
+            "embedding": embedded,
+        }
+        collection.insert_one(document)
+
+
 process_text_file()
+
+process_pdf()
 
 
 def text_to_embedding(text):
