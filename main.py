@@ -63,11 +63,11 @@ def query_data(query):
 # Create a web interface for the app, using Gradio
 
 with gr.Blocks(
-    theme=Base(), title="Question Answering App using Vector Search + RAG"
+    theme=Base(), title="RAG Application with expertise in Marine Biology 101"
 ) as demo:
     gr.Markdown(
         """
-        # Question Answering App using Atlas Vector Search + RAG Architecture
+        # RAG Application with expertise in Marine Biology 101
         """
     )
     textbox = gr.Textbox(label="Enter your Question:")
