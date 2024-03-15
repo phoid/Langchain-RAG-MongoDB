@@ -33,7 +33,7 @@ def query_data(query):
     # Perform Atlas Vector Search using Langchain's vectorStore
     # similarity_search returns MongoDB documents most similar to the query
     docs = vectorStore.similarity_search(query, K=1)
-    as_output = docs[0]
+    as_output = docs[0].page_content
     # print("------------------------------------------------------"docs[0])
     # Leveraging Atlas Vector Search paired with Langchain's QARetriever
 
